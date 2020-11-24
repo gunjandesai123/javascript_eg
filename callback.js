@@ -1,15 +1,28 @@
-let num = 10;
 
-for (let i = 1; i <= num; i++) {
-  for (let j = 1; j <= num; j++) {
-   
-   
-    if(i == 1 || i == num){
-      document.writeln(j+' ')
-    }else if(j == num - (i -1) || j == 1 || j == num){
-      document.writeln(j+' ')
-    }
-    // document.writeln("\u00A0");
-  }
-  document.writeln("<br/>");
+let counter = 0;
+ function getData (){
+
+  console.log('My name is ' + this.name)
 }
+
+function doSomeMagic(fn,d){
+  let timer;
+  return function(){
+    let context = this;
+    args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(context,args);
+      // getData();
+    }, d);
+  }
+
+}
+
+const amy = {
+  name: 'amy',
+  speak: doSomeMagic(getData,300),
+}
+amy.speak()
+
+const betterFunction = doSomeMagic(getData,300) 
